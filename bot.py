@@ -1,9 +1,12 @@
 import pyautogui
 import time
 
-def imagecheck(image, conf=.7):
+def imagecheck(image, conf=.7, region=None):
     try:
-        location = pyautogui.locateOnScreen(image, confidence=conf)
+        if region:
+            location = pyautogui.locateOnScreen(image, confidence=conf, region=region)
+        else:
+            location = pyautogui.locateOnScreen(image, confidence=conf)
         
         if location is not None:
             center = pyautogui.center(location)
@@ -15,8 +18,11 @@ def imagecheck(image, conf=.7):
     except Exception:
         return None
     
-def clickimage(image, conf=.7):
-    location = imagecheck(image, conf)
+def clickimage(image, conf=.7, region=None):
+    if region is not None:
+        location = imagecheck(image, conf, region)
+    else:
+        location = imagecheck(image, conf)
     
     if location is not None:
         pyautogui.click(location)
@@ -27,4 +33,4 @@ while True:
     time.sleep(2)
     clickimage("gem.png")
     clickimage("retry.png")
-
+    clickimage("floatgem.png", .5, region=(990,120,300,300))
