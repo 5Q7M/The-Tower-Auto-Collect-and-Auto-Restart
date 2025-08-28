@@ -33,5 +33,6 @@ while True:
     time.sleep(2)
     clickimage("gem.png")
     clickimage("retry.png")
-    if imagecheck("endround.png"):
+    if imagecheck("dollarsign.png"):
         clickimage("floatgem.png", .5, region=(990,120,300,300))
+
